@@ -5,6 +5,8 @@ import sys
 import re
 import math
 import random
+from lxml import etree
+import time
 
 
 class Bracket:
@@ -103,10 +105,6 @@ class Bracket:
 
 
 
-
-
-
-
 class Team:
     def __init__(self, name, seed, probs, region):
         self.name = name
@@ -129,6 +127,15 @@ class Team:
             winprob = 1.0 - float(i) / (i + self.seed)
             self.winprob[i] = winprob
             self.logwin[i] = math.log(winprob)
+            
+    def list_winprob(self, seed_wins):
+        self.winprob = {}
+        self.logwin = {}
+        
+        for i in range(1, 17):
+            self.winprob[i] = seed_wins[self.seed - 1][i - 1]
+            self.logwin[i] = math.log(seed_wins[self.seed - 1][i - 1])
+            
 
 
 class Bournoulli:
@@ -163,10 +170,20 @@ class Bournoulli:
 
 
 
+def load_seed_win_probs(seed_file):
+    seed_win_probs = []
+    with open(seed_file, 'r') as csvfile:
+        csv_reader = csv.reader(csvfile)
+        for row in csv_reader:
+           
+            float_row = [float(x) for x in row]
+            seed_win_probs.append(float_row)
+            
+    return seed_win_probs
+        
 
 
-
-def load_teams(filename):
+def dep_load_teams(filename):
     my_bracket = Bracket()
     with open(filename) as csvfile:
         csv_reader = csv.reader(csvfile)
@@ -182,15 +199,17 @@ def load_teams(filename):
 
 def main(argv):
 
-    my_bracket = load_teams('2017_projections.csv')
-    other_bracket = load_teams('2016_projections.csv')
+    my_bracket = dep_load_teams('2017_projections.csv')
+    other_bracket = dep_load_teams('2016_projections.csv')
 
+    seed_wins = load_seed_win_probs('seed_win_probs.csv')
+    
     for team in my_bracket.teams:
         team.team_print()
-        team.default_winprob()
+        team.list_winprob(seed_wins)
 
     for team in other_bracket.teams:
-        team.default_winprob()
+        team.list_winprob(seed_wins)
 
     my_bracket.create_rounds()
     other_bracket.create_rounds()
@@ -207,12 +226,12 @@ def main(argv):
     '''
     bourn = Bournoulli(my_bracket)
     bourn.set_threshold_from_file('2017_results.csv')
-    bourn.estimate_bournoulli(1000000, 10000)
+    bourn.estimate_bournoulli(100000, 10000)
     '''
     other_b = Bournoulli(other_bracket)
     other_b.set_threshold_from_file('2016_results.csv')
-    other_b.estimate_bournoulli(1000000, 10000)
-
+    other_b.estimate_bournoulli(100000, 10000)
+    
     print("this finished")
 
 
