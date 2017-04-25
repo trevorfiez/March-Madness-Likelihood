@@ -6,12 +6,13 @@ To measure any sort of likelihood, I made a statistical model to compute a teams
 
 ## Estimating a Team's Probability of Winning ##
 
-First I counted all games from 
-![Game_Counts](trevorfiez.github.com/trevorfiez/March-Madness-Likelihood/game_counts.png)
+First I counted all games from
 
-![Unsooth_Probs](trevorfiez.github.com/trevorfiez/March-Madness-Likelihood/raw.png)
+![Game_Counts](trevorfiez.github.io/trevorfiez/March-Madness-Likelihood/game_counts.png)
 
-![Smooth_Probs](trevorfiez.github.com/trevorfiez/March-Madness-Likelihood/smoothed_real.png)
+![Unsooth_Probs](trevorfiez.github.io/trevorfiez/March-Madness-Likelihood/raw.png)
+
+![Smooth_Probs](trevorfiez.github.io/trevorfiez/March-Madness-Likelihood/smoothed_real.png)
 
 ## Error Bound for Number of Brackets Less Likely Than Real Outcome ##
 
