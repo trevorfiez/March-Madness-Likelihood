@@ -6,13 +6,17 @@ To measure any sort of likelihood, I made a statistical model to compute a teams
 
 ## Estimating a Team's Probability of Winning ##
 
-First I counted all games from
+First I counted all games from every tournement from 1979. The winning percentage for each seed vs each seed is shown below. Where there were cases when a match-up had never occured, I set the winning probability to be 0.5. 
+
+![Unsooth_Probs](https://trevorfiez.github.io/March-Madness-Likelihood/raw.png)
+
+As you can see there are a lot of areas that might be statitical anomolies because there has not been enough games. For example, should a 9 seed really be favored over a 4 seed? To better illustrate the lack of data the number of matchups for each seed vs. each seed is shown below. 
 
 ![Game_Counts](https://trevorfiez.github.io/March-Madness-Likelihood/game_counts.png)
 
-![Unsooth_Probs](trevorfiez.github.io/March-Madness-Likelihood/raw.png)
+To fix this and to simulate the results for matchups that have not been played, I biased the actual data with a previous proxy count. I keep track of both the wins and losses for each matchup. The initial win count then is 8 - (lossing_seed - winning_seed). The initial count of all the games is then set to 16. I would then go through all the games again and add the actual results to these counts to compute the probability of any team beating another.
 
-![Smooth_Probs](trevorfiez.github.io/March-Madness-Likelihood/smoothed_real.png)
+![Smooth_Probs](https://trevorfiez.github.io/March-Madness-Likelihood/smoothed_real.png)
 
 ## Error Bound for Number of Brackets Less Likely Than Real Outcome ##
 
