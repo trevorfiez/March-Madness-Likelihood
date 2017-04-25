@@ -8,7 +8,7 @@ To measure any sort of likelihood, I made a statistical model to compute a teams
 
 First I counted all games from
 
-![Game_Counts](trevorfiez.github.io/March-Madness-Likelihood/game_counts.png)
+![Game_Counts](https://trevorfiez.github.io/March-Madness-Likelihood/game_counts.png)
 
 ![Unsooth_Probs](trevorfiez.github.io/March-Madness-Likelihood/raw.png)
 
